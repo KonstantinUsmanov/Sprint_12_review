@@ -1,3 +1,5 @@
+// МОЖНО ЛУЧШЕ
+// json - не говорящее название для аргумента функции. Лучше использовать cities_json или что-то вроде
 void ParseCitySubjson(vector<City>& cities, const Json& json, const Country& country) {
     for (const auto& city_json : json.AsList()) {
         const auto& city_obj = city_json.AsObject();
