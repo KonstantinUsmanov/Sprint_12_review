@@ -9,9 +9,17 @@ class ReadingSystem {
 public:
     ReadingSystem() : user_pages_(MAX_USER, 0), page_counts_(MAX_PAGE, 0), total_users_(0) {}
 
+    // ВОЗМОЖНО ЛУЧШЕ
+    // Если копии аргументов, передаваемых в функцию,
+    // не планируется менять, лучше передавать их константными.
+    // Так можно избежать случайного изменения при написании и 
+    // развитии кода.
     void Read(int user, int page) {
         int prev_page = user_pages_[user];
         if (prev_page == 0) {
+            // МОЖНО ЛУЧШЕ
+            // Здесь и ниже лучше использовать префиксные операции декремента и инкремента.
+            // Это позволяет избежать лешнего копирования.
             total_users_++;
         } else {
             page_counts_[prev_page]--;
@@ -36,6 +44,9 @@ public:
             less_pages += page_counts_[p];
         }
 
+        // МОЖНО ПРОЩЕ
+        // Статик каст здесь избыточен. Можно просто написать вместо "1" "1.". 
+        // Компилятор сам выполнит приведение.
         return static_cast<double>(less_pages) / (total_users_ - 1);
     }
 
@@ -52,6 +63,8 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
+    // МОЖНО ЛУЧШЕ
+    // Это не говорящее имя переменной.
     int Q;
     cin >> Q;
 
@@ -69,6 +82,8 @@ int main() {
             int user;
             cin >> user;
             double ratio = system.Cheer(user);
+            // МОЖНО ЛУЧШЕ
+            // Точность можно задать один раз в самом начале main.
             cout << setprecision(6) << ratio << '\n';
         }
     }

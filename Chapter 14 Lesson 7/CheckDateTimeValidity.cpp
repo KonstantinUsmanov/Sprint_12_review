@@ -20,6 +20,9 @@ void ValidateDay(int day, int month, int year) {
     }
 }
 
+// МОЖНО ЛУЧШЕ
+// Можно написать ещё одну функцию ValidateTime, в которой вызвать функции
+// в строках 37, 38, 39. Так главная функция станет короче.
 void ValidateTimeComponent(int value, int max, const string& component) {
     if (value < 0 || value > max) {
         throw domain_error(component + " is "s + (value < 0 ? "too small" : "too big"));
