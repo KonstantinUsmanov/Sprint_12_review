@@ -10,6 +10,9 @@ using namespace std;
 
 class Domain {
 public:
+    // МОЖНО ЛУЧШЕ
+    // Здесь можно использовать perfect forwarding.
+    // Тогда удастся избежать лишних копирований.
     Domain(const string& str) : domain_(str){
         std::reverse(domain_.begin(), domain_.end());
         domain_ += '.';
@@ -23,6 +26,8 @@ public:
         if (domain_.size() < parent.domain_.size()) {
             return false;
         }
+        // КРУТО
+        // Эх, а я не догадался применить стандартную функцию. Хорошо сделано!
         return std::equal(parent.domain_.begin(), parent.domain_.end(), domain_.begin());
     }
 
@@ -55,6 +60,9 @@ public:
             return lhs.GetReversed() < rhs.GetReversed();
         });
 
+        // МОЖНО ЛУЧШЕ
+        // Всю конструкцию, включая ретёрно, можно записать в одну строку,
+        // используя оператор ||.
         if (it != blocked_domains_.begin()) {
             --it;
             return domain.IsSubdomain(*it);
